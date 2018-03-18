@@ -13,6 +13,18 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
 }));
 
+new GraphQLObjectType({
+  name: 'MyType',
+  fields: {
+    myField: {
+      type: GraphQLString,
+      resolve(parentValue, args, request) {
+        // use `request.session` here
+      }
+    }
+  }
+});
+
 // Priority serve any static files.
 app.use(express.static("build"));
 
