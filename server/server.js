@@ -1,23 +1,16 @@
-const express = require("express");
+const express = require('express')
+const session = require('express-session')
+const graphqlHTTP = require('express-graphql')
+const { buildSchema, GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql')
 
-// GraphQL 
-const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+const app = express()
 
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-const root = { hello: () => 'Hello world!' };
-
-const app = express();
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 
 app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
+  schema: MyGraphQLSchema,
   graphiql: true,
+  rootValue: root,
 }));
 
 // Priority serve any static files.
