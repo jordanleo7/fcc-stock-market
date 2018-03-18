@@ -5,7 +5,8 @@
   "dependencies": {
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "mongoose": "^5.0.10",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"
@@ -23,5 +24,5 @@
     "nodemon": "^1.17.1",
     "npm-run-all": "^4.1.2"
   },
-  "proxy": "http://localhost:3005"
+  "proxy": "http://localhost:3001"
 }

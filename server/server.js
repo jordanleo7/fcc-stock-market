@@ -1,7 +1,24 @@
 const express = require("express");
-const mongoose = require("mongoose");
+
+// GraphQL 
+const graphqlHTTP = require('express-graphql');
+const { buildSchema } = require('graphql');
+
+const schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`);
+
+const root = { hello: () => 'Hello world!' };
 
 const app = express();
+
+app.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}));
 
 // Priority serve any static files.
 app.use(express.static("build"));
