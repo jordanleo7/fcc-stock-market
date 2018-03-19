@@ -7,8 +7,10 @@ const app = express()
 
 app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 
+const schema = require('./schema')
+
 app.use('/graphql', graphqlHTTP({
-  schema: MyGraphQLSchema,
+  schema,
   graphiql: true,
   rootValue: root,
 }));
