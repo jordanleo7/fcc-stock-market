@@ -11,8 +11,7 @@ const schema = require('./schema')
 
 app.use('/graphql', graphqlHTTP({
   schema,
-  graphiql: true,
-  rootValue: root,
+  graphiql: true
 }));
 
 new GraphQLObjectType({

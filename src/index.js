@@ -9,18 +9,14 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-// Pass your GraphQL endpoint to uri
+/* Pass your GraphQL endpoint to uri
 const client = new ApolloClient({ 
   link: new HttpLink(), // { uri: process.env.HTTPLINK} ?
   cache: new InMemoryCache()
-});
+}); */
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ApolloProvider>, 
+  <App />,
   document.getElementById('root')
 )
 
