@@ -1,30 +1,23 @@
 const express = require('express')
 const session = require('express-session')
 const graphqlHTTP = require('express-graphql')
-const { buildSchema, GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql')
+const schema = require('./schema');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express()
 
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+app.use(cors());
 
-const schema = require('./schema')
+mongoose.connect(process.env.MONGO_URI);
+mongoose.connection.once('open', () => {
+  console.log('Conneted to MongoDB');
+});
 
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: true
 }));
-
-new GraphQLObjectType({
-  name: 'MyType',
-  fields: {
-    myField: {
-      type: GraphQLString,
-      resolve(parentValue, args, request) {
-        // use `request.session` here
-      }
-    }
-  }
-});
 
 // Priority serve any static files.
 app.use(express.static("build"));
