@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-const query = gql`{
-  allStocks {
-    name
+const query = gql`
+  query AllStocksQuery {
+    allStocks(orderBy: createdAt_DESC) {
+      name
+    }
   }
-}`
+`
 
 
 class Home extends Component {
@@ -22,4 +25,5 @@ class Home extends Component {
 }
 
 Home = graphql(query)(Home)
+
 export default Home;

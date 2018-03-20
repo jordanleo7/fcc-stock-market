@@ -6,22 +6,16 @@ import AddStock from './components/AddStock';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { BrowserRouter } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, createBatchingNetworkInterface } from 'react-apollo';
-// import { ApolloClient } from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-const networkInterface = createBatchingNetworkInterface({
-  uri: 'http://0.0.0.0:3001/gql/',
-  batchInterval: 0,
-  opts: {
-    credentials: 'same-origin',
-  },
-})
+const httpLink = new HttpLink({ uri: process.env.MONGO_URI })
 
 const client = new ApolloClient({
-  networkInterface: networkInterface,
+  link: httpLink,
+  cache: new InMemoryCache()
 })
 
 class App extends Component {
