@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const mutation = gql`
-  mutation AddStock($stock: String!) {
-    addStock(stock: $stock) {
+const addStock = gql`
+  mutation addStock($name: String!) {
+    addStock(name: $name) {
       name
     }
   }
@@ -16,7 +16,7 @@ class AddStock extends Component {
     e.preventDefault()
     let formData = new FormData(this.form)
     this.props
-      .mutate({ variables: { stock: formData.get('stock') } })
+      .mutate({ variables: { name: formData.get('stock') } })
       .then(res => {
         if (res.data.addStock.formErrors === null) {
           window.location.replace(`/`)
@@ -45,5 +45,5 @@ class AddStock extends Component {
   }
 }
 
-AddStock = graphql(mutation)(AddStock)
+AddStock = graphql(addStock)(AddStock);
 export default AddStock

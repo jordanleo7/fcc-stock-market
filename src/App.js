@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import Home from './components/Home';
-import AddStock from './components/AddStock';
-import logo from './logo.svg';
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-
-const httpLink = new HttpLink({ uri: process.env.MONGO_URI })
+import Home from './components/Home';
+import AddStock from './components/AddStock';
+import logo from './logo.svg';
+import './App.css';
 
 const client = new ApolloClient({
-  link: httpLink,
+  link: new HttpLink({ uri: 'http://localhost:3001/graphql' }),
   cache: new InMemoryCache()
 })
 
