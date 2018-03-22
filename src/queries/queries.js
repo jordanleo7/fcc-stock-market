@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
-const getStocksQuery = gql`
+const StocksQuery = gql`
   query getStocksQuery {
     stocks {
       id
       ticker
     }
   }
-`;
+`
 
-export { getStocksQuery };
+export { StocksQuery };

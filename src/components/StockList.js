@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { getStocksQuery } from '../queries/queries';
+import { StocksQuery } from '../queries/queries';
 
 class StockList extends Component {
   constructor(props) {
@@ -13,6 +13,9 @@ class StockList extends Component {
 
   displayStocks() {
     let data = this.props.data;
+    if (data.error) {
+      return <div>Error! {data.error.message}</div>;
+    }
     if (data.loading) {
       return ( <div>Loading stocks</div> );
     } else {
@@ -36,4 +39,4 @@ class StockList extends Component {
 
 }
 
-export default graphql(getStocksQuery)(StockList);
+export default graphql(StocksQuery)(StockList);

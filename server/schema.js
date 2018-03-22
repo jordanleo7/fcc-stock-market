@@ -23,8 +23,8 @@ const StockType = new GraphQLObjectType({
   })
 });
 
-const getStocksQuery = new GraphQLObjectType({
-  name: 'getStocksQuery',
+const StocksQuery = new GraphQLObjectType({
+  name: 'StocksQuery',
   fields: {
     stock: {
       type: StockType,
@@ -45,5 +45,5 @@ stock(ticker: 'AAPL') {
 */
 
 module.exports = new GraphQLSchema({
-  query: getStocksQuery
+  query: StocksQuery
 })
