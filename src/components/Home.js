@@ -3,15 +3,7 @@ import { Link } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import AddStock from './AddStock';
-
-const query = gql`
-  query AllStocksQuery {
-    allStocks(orderBy: createdAt_DESC) {
-      name
-    }
-  }
-`
-
+import StockList from './StockList';
 
 class Home extends Component {
   render() {
@@ -20,15 +12,12 @@ class Home extends Component {
       return <div>Loading</div>
     }
     return (
-      <div>Home
-
-
+      <div>
+        <StockList />
         <AddStock />
       </div>
     )
   }
 }
-
-Home = graphql(query)(Home)
 
 export default Home;

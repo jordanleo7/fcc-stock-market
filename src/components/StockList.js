@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { getStocksQuery } from '../queries/queries';
 
-function TodoApp({ data: { todos } }) {
-  return (
-    <ul>
-      {todos.map(({ id, text }) => (
-        <li key={id}>{text}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default graphql(gql`
-  query TodoAppQuery {
-    todos {
-      id
-      text
+class StockList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      
     }
   }
-`)(TodoApp);
+
+  displayStocks() {
+    let data = this.props.data;
+    if (data.loading) {
+      return ( <div>Loading stocks</div> );
+    } else {
+      return data.books.map(stock => {
+        return (
+          <li key={stock.id} onClick={ (e) => this.setState({ selected: stock.id }) }> {stock.name} </li>
+        );
+      })
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <ul id="stock-list">
+          { this.displayStocks() }
+        </ul>
+      </div>
+    )
+  }
+
+}
+
+export default graphql(getStocksQuery)(StockList);

@@ -1,4 +1,5 @@
 const express = require('express')
+require('dotenv').config();
 const session = require('express-session')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema');
@@ -11,7 +12,7 @@ app.use(cors());
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once('open', () => {
-  console.log('Conneted to MongoDB');
+  console.log('Connected to MongoDB');
 });
 
 app.use('/graphql', graphqlHTTP({
