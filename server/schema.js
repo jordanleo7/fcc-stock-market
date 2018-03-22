@@ -1,6 +1,19 @@
 const graphql = require('graphql');
 const Stock = require('./Stock');
 const _ = require('lodash');
+const axios = require('axios');
+
+function newStockTicker (tickerSymbol) {
+  axios.get(`https://api.iextrading.com/1.0/stock/${tickerSymbol}`)
+  .then(response => {
+    if (response.companyName !== null) {
+
+    }
+  })
+  .catch({
+
+  })
+}
 
 var stocks = [
   { ticker: 'AAPL', id: '1' },
@@ -23,8 +36,8 @@ const StockType = new GraphQLObjectType({
   })
 });
 
-const StocksQuery = new GraphQLObjectType({
-  name: 'StocksQuery',
+const StockQuery = new GraphQLObjectType({
+  name: 'StockQueryType',
   fields: {
     stock: {
       type: StockType,
@@ -37,13 +50,6 @@ const StocksQuery = new GraphQLObjectType({
   }
 });
 
-/*
-stock(ticker: 'AAPL') {
-  id
-  ticker
-}
-*/
-
 module.exports = new GraphQLSchema({
-  query: StocksQuery
+  query: StockQuery
 })

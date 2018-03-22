@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import { StocksQuery } from '../queries/queries';
+import { StockQuery } from '../queries/queries';
 
 class StockList extends Component {
   constructor(props) {
@@ -39,4 +39,4 @@ class StockList extends Component {
 
 }
 
-export default graphql(StocksQuery)(StockList);
+export default graphql(StockQuery)(StockList);
