@@ -1,7 +1,7 @@
-const express = require('express')
+const express = require('express');
 require('dotenv').config();
-const session = require('express-session')
-const graphqlHTTP = require('express-graphql')
+const session = require('express-session');
+const graphqlHTTP = require('express-graphql');
 const schema = require('./schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
