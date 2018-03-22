@@ -29,5 +29,5 @@ app.route('*', function(request, response) {
 });
 
 // Server listen
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Express is listening on port ${PORT}`))
+const SERVERPORT = process.env.SERVERPORT || 4000;
+app.listen(SERVERPORT, () => console.log(`Express is listening on port ${SERVERPORT}`))
