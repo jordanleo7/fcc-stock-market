@@ -21,7 +21,7 @@ class StockList extends Component {
     } else {
       return data.stocks.map(stock => {
         return (
-          <li key={stock.id} onClick={ (e) => this.setState({ selected: stock.id }) }> {stock.name} </li>
+          <li> {stock.ticker} </li>
         );
       })
     }

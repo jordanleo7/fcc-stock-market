@@ -1,6 +1,8 @@
 const graphql = require('graphql');
 const Stock = require('./Stock');
 const _ = require('lodash');
+
+/*
 const axios = require('axios');
 
 function newStockTicker (tickerSymbol) {
@@ -14,6 +16,7 @@ function newStockTicker (tickerSymbol) {
 
   })
 }
+*/
 
 var stocks = [
   { ticker: 'AAPL', id: '1' },

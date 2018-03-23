@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const StockQuery = gql`
-  query getStocksQuery {
+  query StockQuery {
     stocks {
       id
       ticker
