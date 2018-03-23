@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
+// import {gql} from "react-apollo";
 
-const StockQuery = gql`
-  query StockQuery {
+const getStocksQuery = gql`
+  {
     stocks {
       id
       ticker
     }
   }
-`
+`;
 
-export { StockQuery };
+export { getStocksQuery };

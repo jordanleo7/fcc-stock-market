@@ -1,14 +1,18 @@
 const express = require('express');
-require('dotenv').config();
 const session = require('express-session');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+require('dotenv').config();
+const bodyParser = require('body-parser');
+const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
 
 app.use(cors());
+app.options('*', cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({'extended':'true'}));
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once('open', () => {

@@ -1,11 +1,17 @@
 const graphql = require('graphql');
 const Stock = require('./Stock');
 const _ = require('lodash');
+
 const { 
   GraphQLObjectType,
   GraphQLString,
-  GraphQLSchema
+  GraphQLSchema,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLList,
+  GraphQLNonNull
 } = graphql;
+
 /*
 const axios = require('axios');
 
@@ -32,13 +38,13 @@ var stocks = [
 const StockType = new GraphQLObjectType({
   name: 'Stock',
   fields: () => ({
-    id: { type: GraphQLString },
+    id: { type: GraphQLID },
     ticker: { type: GraphQLString }
   })
 });
 
-const StockQuery = new GraphQLObjectType({
-  name: 'StockQueryType',
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
   fields: {
     stock: {
       type: StockType,
@@ -52,5 +58,5 @@ const StockQuery = new GraphQLObjectType({
 });
 
 module.exports = new GraphQLSchema({
-  query: StockQuery
-})
+  query: RootQuery
+});
