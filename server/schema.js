@@ -1,7 +1,11 @@
 const graphql = require('graphql');
 const Stock = require('./Stock');
 const _ = require('lodash');
-
+const { 
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLSchema
+} = graphql;
 /*
 const axios = require('axios');
 
@@ -24,12 +28,6 @@ var stocks = [
   { ticker: 'GOOGL', id: '3' },
   { ticker: 'FB', id: '4' }
 ]
-
-const { 
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLSchema
-} = graphql;
 
 const StockType = new GraphQLObjectType({
   name: 'Stock',
