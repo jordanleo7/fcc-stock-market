@@ -12,12 +12,13 @@ class StockList extends Component {
 
   displayStocks() {
     let data = this.props.data;
-    if (data.error) {
-      return <div>Error! {data.error.message}</div>;
-    }
+    console.log(data);
     if (data.loading) {
       return ( <div>Loading stocks</div> );
     } 
+    if (data.error) {
+      return <div>{data.error.message}</div>;
+    }
     return data.stocks.map(stock => {
       return (
         <li> {stock.ticker} </li>
