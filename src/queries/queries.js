@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-// import {gql} from "react-apollo";
 
 const getStocksQuery = gql`
   {
@@ -8,6 +7,6 @@ const getStocksQuery = gql`
       ticker
     }
   }
-`;
+`
 
 export { getStocksQuery };

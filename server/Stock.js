@@ -5,4 +5,4 @@ const stockSchema = new Schema({
   ticker: String
 });
 
-module.exports = mongoose.model('Stock', stockSchema);
+module.exports = mongoose.model('stock-market-app-stock', stockSchema);

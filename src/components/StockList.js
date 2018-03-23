@@ -17,13 +17,12 @@ class StockList extends Component {
     }
     if (data.loading) {
       return ( <div>Loading stocks</div> );
-    } else {
-      return data.stocks.map(stock => {
-        return (
-          <li> {stock.ticker} </li>
-        );
-      })
-    }
+    } 
+    return data.stocks.map(stock => {
+      return (
+        <li> {stock.ticker} </li>
+      );
+    })
   }
 
   render() {
