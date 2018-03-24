@@ -19,10 +19,12 @@ class StockList extends Component {
     if (data.error) {
       return <div>{data.error.message}</div>;
     }
-    return (
-        <li> {data.stock.ticker} </li>
+    return data.stocks.map(stock => {
+      return (
+        <li> {stock.ticker} </li>
       );
-    }
+    })
+  }
 
   render() {
     return (

@@ -53,9 +53,17 @@ const RootQuery = new GraphQLObjectType({
         // code to get data from db/other source
         return _.find(stocks, { ticker: args.ticker} );
       }
+    },
+    stocks: {
+      type: new GraphQLList(StockType),
+      resolve(parent, args) {
+        return Stock.find({});
+      }
     }
   }
 });
+
+
 
 module.exports = new GraphQLSchema({
   query: RootQuery
