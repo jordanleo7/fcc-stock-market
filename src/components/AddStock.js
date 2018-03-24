@@ -1,18 +1,46 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { addStockMutation, getStocksQuery } from '../queries/queries';
 
 class AddStock extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      ticker: ''
+    };
+    this.handleTickerChange = this.handleTickerChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleTickerChange(event) {
+    this.setState({ticker: event.target.value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.addStockMutation({
+      variables: {
+        ticker: this.state.ticker
+      },
+      refetchQueries: [{ query: getStocksQuery }]
+    })
+  }
 
   render() {
     return (
       <div>
-        <h1>
-          AddStock
-        </h1>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" name="ticker" value={this.state.ticker} onChange={this.handleTickerChange} placeholder="ticker" required />
+          <button type="submit">Add</button>
+        </form>
       </div>
     )
   }
 }
 
-export default AddStock
+export default compose(
+  graphql(getStocksQuery, { name: "getStocksQuery" }),
+  graphql(addStockMutation, { name: "addStockMutation" })
+)(AddStock);

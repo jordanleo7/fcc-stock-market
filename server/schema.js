@@ -1,6 +1,5 @@
 const graphql = require('graphql');
 const Stock = require('./Stock');
-const _ = require('lodash');
 
 const { 
   GraphQLObjectType,
@@ -51,7 +50,7 @@ const RootQuery = new GraphQLObjectType({
       args: { ticker: { type: GraphQLString } },
       resolve(parent, args) {
         // code to get data from db/other source
-        return _.find(stocks, { ticker: args.ticker} );
+        return Stock.findOne({ ticker: args.ticker });
       }
     },
     stocks: {
@@ -63,8 +62,23 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
-
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addStock: {
+      type: StockType,
+      args: { ticker: { type: GraphQLString } },
+      resolve(parent, args) {
+        let stock = new Stock({
+          ticker: args.ticker
+        });
+      return stock.save();
+      }
+    }
+  }
+})
 
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });

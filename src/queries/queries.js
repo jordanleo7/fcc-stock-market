@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const getStockQuery = gql`
-  {
-    stock(ticker: "AAPL") {
+  query getStockQuery($ticker: String!) {
+    stock(ticker: $ticker) {
       id
       ticker
     }
@@ -18,4 +18,13 @@ const getStocksQuery = gql`
   }
 `
 
-export { getStockQuery, getStocksQuery };
+const addStockMutation = gql`
+  mutation addStockMutation($ticker: String!) {
+    addStock(ticker: $ticker) {
+      id
+      ticker
+    }
+  }
+`
+
+export { getStockQuery, getStocksQuery, addStockMutation };
