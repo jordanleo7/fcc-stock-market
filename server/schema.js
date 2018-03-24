@@ -11,29 +11,6 @@ const {
   GraphQLNonNull
 } = graphql;
 
-/*
-const axios = require('axios');
-
-function newStockTicker (tickerSymbol) {
-  axios.get(`https://api.iextrading.com/1.0/stock/${tickerSymbol}`)
-  .then(response => {
-    if (response.companyName !== null) {
-
-    }
-  })
-  .catch({
-
-  })
-}
-*/
-
-var stocks = [
-  { ticker: 'AAPL', id: '1' },
-  { ticker: 'MSFT', id: '2' },
-  { ticker: 'GOOGL', id: '3' },
-  { ticker: 'FB', id: '4' }
-]
-
 const StockType = new GraphQLObjectType({
   name: 'Stock',
   fields: () => ({
