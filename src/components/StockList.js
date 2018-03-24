@@ -9,7 +9,6 @@ class StockList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
     }
   }
 
