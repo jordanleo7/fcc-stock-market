@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { getStocksQuery } from '../queries/queries';
+import DeleteStock from './DeleteStock';
 
 class StockList extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class StockList extends Component {
     }
     return data.stocks.map((stock, index) => {
       return (
-        <li key={index}> {stock.ticker} </li>
+        <li key={index}> {stock.ticker} <DeleteStock stockTicker={stock.ticker} /></li>
       );
     })
   }

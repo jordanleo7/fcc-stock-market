@@ -19,7 +19,7 @@ const getStocksQuery = gql`
 `
 
 const addStockMutation = gql`
-  mutation addStockMutation($ticker: String!) {
+  mutation addStockMutation ($ticker: String!) {
     addStock(ticker: $ticker) {
       id
       ticker
@@ -27,4 +27,13 @@ const addStockMutation = gql`
   }
 `
 
-export { getStockQuery, getStocksQuery, addStockMutation };
+const deleteStockMutation = gql`
+  mutation deleteStockMutation ($ticker: String!) {
+    deleteStock(ticker: $ticker) {
+      id
+      ticker
+    }
+  }
+`
+
+export { getStockQuery, getStocksQuery, addStockMutation, deleteStockMutation };

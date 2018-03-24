@@ -72,7 +72,14 @@ const Mutation = new GraphQLObjectType({
         let stock = new Stock({
           ticker: args.ticker
         });
-      return stock.save();
+        return stock.save();
+      }
+    },
+    deleteStock: {
+      type: StockType,
+      args: { ticker: { type: GraphQLString } },
+      resolve(parent, args) {
+        return Stock.findOneAndRemove({ ticker: args.ticker });
       }
     }
   }
