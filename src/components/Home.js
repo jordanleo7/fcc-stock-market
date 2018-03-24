@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AddStock from './AddStock';
 import StockList from './StockList';
 
 class Home extends Component {
@@ -7,7 +6,6 @@ class Home extends Component {
     return (
       <div>
         <StockList />
-        <AddStock />
       </div>
     )
   }

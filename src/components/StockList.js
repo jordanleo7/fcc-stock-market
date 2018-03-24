@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { getStocksQuery } from '../queries/queries';
 import Stock from './Stock';
+import AddStock from './AddStock';
+import Chart from './Chart';
 
 class StockList extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class StockList extends Component {
     }
     return data.stocks.map((stock, index) => {
       return (
-        <Stock stock={stock} />
+        <Stock stock={stock} key={index} />
       );
     })
   }
@@ -31,7 +33,9 @@ class StockList extends Component {
     return (
       <div>
         <ul>
+          <Chart ticker='AAPL' />
           { this.displayStocks() }
+          <li key="add"><AddStock /></li>
         </ul>
       </div>
     )
