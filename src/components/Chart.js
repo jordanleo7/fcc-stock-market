@@ -10,12 +10,17 @@ class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tickerList: [],
+      tickerList: props.tickerList,
       tickerData: [],
       chartData: []
     }
   }
 
+
+
+
+
+/*
   componentDidMount() {
     let data = this.props.data;
     if (data.loading) {
@@ -26,15 +31,32 @@ class Chart extends Component {
     }
     return data.stocks.map((stock, index) => {
       this.setState(prevState => ({tickerList: [...prevState.tickerList, stock.ticker]}));
+      this.getStockData(stock.ticker);
+
       return (
-        <Stock stock={stock} key={index} />
+        'a'
       );
     })
   }
 
-  componentDidMount() {
-    axios.get(`https://api.iextrading.com/1.0/stock/${this.props.ticker}/chart/1y`)
+  tickerList() {
+    let data = this.props.data;
+    if (data.loading) {
+      return 'loading';
+    } 
+    if (data.error) {
+      return 'error';
+    }
+    return data.stocks.map((stock, index) => {
+      return stock.ticker;
+    })
+  }
+tickerList={ this.tickerList() }
+
+  getStockData(ticker) {
+    axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {
+      console.log('hi',this.state.tickerList);
       this.setState({ tickerData: response.data });
       console.log(this.state.tickerData);
       let prepareChartData = this.state.tickerData.map((x, index) => {
@@ -48,36 +70,22 @@ class Chart extends Component {
       console.log(error);
     })
   }
+  
+      console.log('testing',this.state.tickerList);
+      */
 
   render() {
 
     let chartData = {
       labels: [],
       datasets: [{
-        label: 'AAPL',
-        data: this.state.chartData,
-        borderColor: ["red"],
-        borderWidth: 2,
-        fill: false
-      },{
-        label: 'GOOGL',
+        label: 'TEST',
         data: ['150','151','153','155','149'],
-        borderColor: ["blue"],
+        borderColor: ["red"],
         borderWidth: 2,
         fill: false
       }]
     };
-
-    
-
-
-
-    //var convertChartData = this.state.chartdata.map((chart, index) => {
-      //var chartData = chart.options.map((chart, index) => {
-      //  convertedChartData.labels.push('1');
-      //  convertedChartData.datasets[0].data.push('1');
-      //})
-    //})
 
     return (
       <div className="chart">

@@ -9,12 +9,12 @@ class StockList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
     }
   }
 
   displayStocks() {
     let data = this.props.data;
-    console.log(data);
     if (data.loading) {
       return ( <div>Loading stocks</div> );
     } 
@@ -27,12 +27,25 @@ class StockList extends Component {
       );
     })
   }
-
+/*
+  tickerList() {
+    let data = this.props.data;
+    if (data.loading) {
+      return 'loading';
+    } 
+    if (data.error) {
+      return 'error';
+    }
+    return data.stocks.map((stock, index) => {
+      return stock.ticker;
+    })
+  }
+*/
   render() {
     return (
       <div>
         <ul>
-          <Chart ticker='AAPL' />
+          <Chart /*tickerList={ this.tickerList() }*/ />
           { this.displayStocks() }
           <li key="add"><AddStock /></li>
         </ul>
