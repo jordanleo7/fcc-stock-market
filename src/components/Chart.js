@@ -7,8 +7,7 @@ class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tickerData: [],
-      chartData2: []
+      iexResults: []
     }
   }
 
@@ -99,10 +98,10 @@ tickerList={ this.tickerList() }
   // 
 
   componentDidMount() {
-     this.letsDoThis();
+     this.getStockDataMap();
   }
 
-  async letsDoThis() {
+  async getStockDataMap() {
     let dummyStocks = ["AAPL","MSFT","GOOGL"];
 
     let finalResult = [];
@@ -111,7 +110,7 @@ tickerList={ this.tickerList() }
       
       let answer;
       try {
-        answer = await this.getStockData(stock);
+        answer = await this.getIEXData(stock);
       }
       catch (error) {
         console.log(error);
@@ -122,12 +121,13 @@ tickerList={ this.tickerList() }
 
     }))
 
-    console.log('results:', results);
+    this.setState({ iexResults: results });
+    console.log(this.state.iexResults);
   }
   
   // Reusable function to get a stock's data OK
-  getStockData(ticker) {
-    axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
+  getIEXData(ticker) {
+    return axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {
       return response.data.map((x, index) => {
         return x.close;
