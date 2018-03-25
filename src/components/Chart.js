@@ -98,30 +98,37 @@ tickerList={ this.tickerList() }
   // Map through tickers and call getStockData
   // 
 
-
-
   componentDidMount() {
-    let dummyStocks = ["AAPL","MSFT","GOOGL"]
-    let results = [];
-
-    async function getThatData() {
-
-      return dummyStocks.map(await ((ticker, index) => {
-        let cool = await this.getStockData(ticker);
-        results.push(cool);
-        return cool;
-    }))
+     this.letsDoThis();
   }
-    
-      console.log('results:',results);
-    
+
+  async letsDoThis() {
+    let dummyStocks = ["AAPL","MSFT","GOOGL"];
+
+    let finalResult = [];
+
+    let results = await Promise.all(dummyStocks.map(async (stock) => {
+      
+      let answer;
+      try {
+        answer = await this.getStockData(stock);
+      }
+      catch (error) {
+        console.log(error);
+      }
+      finally {
+        return answer;
+      }
+
+    }))
+
+    console.log('results:', results);
   }
   
-  // Reusable function to get a stock's data
+  // Reusable function to get a stock's data OK
   getStockData(ticker) {
     axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {
-      console.log(response)
       return response.data.map((x, index) => {
         return x.close;
       })
