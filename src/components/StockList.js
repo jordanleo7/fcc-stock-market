@@ -27,7 +27,7 @@ class StockList extends Component {
       );
     })
   }
-/*
+
   tickerList() {
     let data = this.props.data;
     if (data.loading) {
@@ -40,12 +40,12 @@ class StockList extends Component {
       return stock.ticker;
     })
   }
-*/
+
   render() {
     return (
       <div>
         <ul>
-          <Chart /*tickerList={ this.tickerList() }*/ />
+          <Chart tickers={ this.tickerList() } />
           { this.displayStocks() }
           <li key="add"><AddStock /></li>
         </ul>
