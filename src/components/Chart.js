@@ -11,124 +11,49 @@ class Chart extends Component {
     }
   }
 
-
-
-
-
-
-/*
-  tickerList() {
-    let data = this.props.data;
-    if (data.loading) {
-      return 'loading';
-    } 
-    if (data.error) {
-      return 'error';
-    }
-    return data.stocks.map((stock, index) => {
-      return stock.ticker;
-    })
-  }
-*/
-
-
-/*
-  componentDidMount() {
-    let data = this.props.data;
-    if (data.loading) {
-      return ( <div>Loading stocks</div> );
-    } 
-    if (data.error) {
-      return <div>{data.error.message}</div>;
-    }
-    return data.stocks.map((stock, index) => {
-      this.setState(prevState => ({tickerList: [...prevState.tickerList, stock.ticker]}));
-      this.getStockData(stock.ticker);
-
-      return (
-        'a'
-      );
-    })
-  }
-
-
-tickerList={ this.tickerList() }
-
-  getStockData(ticker) {
-    axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
-    .then((response) => {
-      console.log('hi',this.state.tickerList);
-      this.setState({ tickerData: response.data });
-      console.log(this.state.tickerData);
-      let prepareChartData = this.state.tickerData.map((x, index) => {
-        //let prepareData = x.map((y, index) => {
-          return x.close;
-        //})
-      });
-      this.setState({ chartData: prepareChartData });
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
-  
-
-
-
-      console.log(this.props.tickers);
-    if (this.props.tickers === undefined) {
-      return ( <div>Loading stocks</div> );
-    } 
-
-        .then((results) => {
-      this.setState({ chartData: results })
-      console.log('results:',results,'chartData:',this.state.chartData);
-    })
-
-            { this.getChartData() }
-
-                    {JSON.stringify(this.props.tickers)}
-        {console.log('yo',this.state.tickerData, this.state.chartData2)}
-        { this.getChartData() }
-
-      */
-
-
-  // Map through tickers and call getStockData
-  // 
-
   componentDidMount() {
      this.getStockDataMap();
   }
 
   async getStockDataMap() {
     let dummyStocks = ["AAPL","MSFT","GOOGL"];
-
     let finalResult = [];
 
-    let results = await Promise.all(dummyStocks.map(async (stock) => {
-      
-      let answer;
+    let iexStockDataResults = await Promise.all(dummyStocks.map(async (ticker) => {
+
+      let iexStockData;
       try {
-        answer = await this.getIEXData(stock);
+        iexStockData = await this.getIEXData(ticker);
       }
       catch (error) {
         console.log(error);
       }
       finally {
-        return answer;
+        return iexStockData;
       }
 
     }))
 
-    this.setState({ iexResults: results });
-    console.log(this.state.iexResults);
+    finalResult = iexStockDataResults.map((result, index) => {
+      let obj = {
+        label: dummyStocks[index],
+        data: result,
+        borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+        borderWidth: 1,
+        fill: false
+      };
+      return obj;
+    })
+
+    this.setState({ iexResults: finalResult });
+    
   }
   
   // Reusable function to get a stock's data OK
   getIEXData(ticker) {
     return axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {
+      console.log(response);
       return response.data.map((x, index) => {
         return x.close;
       })
@@ -139,15 +64,10 @@ tickerList={ this.tickerList() }
   }
 
   render() {
+
     let chartData = {
       labels: [],
-      datasets: [{
-        label: 'TEST',
-        data: ['150','151','153','155','149'],
-        borderColor: ["red"],
-        borderWidth: 2,
-        fill: false
-      }]
+      datasets: this.state.iexResults
     };
 
     return (
@@ -174,6 +94,15 @@ tickerList={ this.tickerList() }
               }
             }
           }}
+          options={{
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }}
+          }
         />
 
       </div>
