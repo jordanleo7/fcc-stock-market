@@ -7,7 +7,9 @@ class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      iexResults: []
+      iexResultsLabels: [],
+      iexResults: [],
+      stockList: this.props.tickers
     }
   }
 
@@ -16,9 +18,8 @@ class Chart extends Component {
   }
 
   async getStockDataMap() {
-    let dummyStocks = ["AAPL","MSFT","GOOGL"];
-    let finalResult = [];
-
+    let dummyStocks = this.state.stockList;
+    console.log(this.props.tickers);
     let iexStockDataResults = await Promise.all(dummyStocks.map(async (ticker) => {
 
       let iexStockData;
@@ -34,18 +35,23 @@ class Chart extends Component {
 
     }))
 
-    finalResult = iexStockDataResults.map((result, index) => {
+    let finalLabels = iexStockDataResults[0].map((day, index) => {
+      return day.label
+    })
+
+    let finalResult = iexStockDataResults.map((result, index) => {
       let obj = {
         label: dummyStocks[index],
         data: result,
         borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
-        borderWidth: 1,
+        borderWidth: 2,
+        pointRadius: 0,
         fill: false
       };
       return obj;
     })
 
-    this.setState({ iexResults: finalResult });
+    this.setState({ iexResults: finalResult, iexResultsLabels: finalLabels });
     
   }
   
@@ -54,8 +60,8 @@ class Chart extends Component {
     return axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {
       console.log(response);
-      return response.data.map((x, index) => {
-        return x.close;
+      return response.data.map((day, index) => {
+        return ({x: day.label, y: day.close});
       })
     })
     .catch((error) => {
@@ -66,7 +72,7 @@ class Chart extends Component {
   render() {
 
     let chartData = {
-      labels: [],
+      labels: this.state.iexResultsLabels,
       datasets: this.state.iexResults
     };
 
@@ -92,17 +98,13 @@ class Chart extends Component {
               labels: {
                 fontFamily: "'Arial', sans-serif"
               }
+            },
+            scales: {
+              xAxes: [{
+                display: false
+              }]
             }
           }}
-          options={{
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }}
-          }
         />
 
       </div>

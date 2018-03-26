@@ -42,10 +42,13 @@ class StockList extends Component {
   }
 
   render() {
+
+    let tickerListResults = this.tickerList();
+
     return (
       <div>
         <ul>
-          <Chart tickers={ this.tickerList() } />
+          { tickerListResults !== 'loading' ? <Chart tickers={ tickerListResults } /> : null }
           { this.displayStocks() }
           <li key="add"><AddStock /></li>
         </ul>
