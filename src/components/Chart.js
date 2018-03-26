@@ -13,14 +13,19 @@ class Chart extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ stockList: nextProps.tickers });
+    this.getStockDataMap();
+  }
+
   componentDidMount() {
      this.getStockDataMap();
   }
 
   async getStockDataMap() {
-    let dummyStocks = this.state.stockList;
-    console.log(this.props.tickers);
-    let iexStockDataResults = await Promise.all(dummyStocks.map(async (ticker) => {
+    const stocks = this.props.tickers;
+
+    let iexStockDataResults = await Promise.all(stocks.map(async (ticker) => {
 
       let iexStockData;
       try {
@@ -41,7 +46,7 @@ class Chart extends Component {
 
     let finalResult = iexStockDataResults.map((result, index) => {
       let obj = {
-        label: dummyStocks[index],
+        label: stocks[index],
         data: result,
         borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
         borderWidth: 2,
@@ -71,7 +76,7 @@ class Chart extends Component {
 
   render() {
 
-    let chartData = {
+    const chartData = {
       labels: this.state.iexResultsLabels,
       datasets: this.state.iexResults
     };
