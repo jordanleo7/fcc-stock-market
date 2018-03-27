@@ -9,21 +9,22 @@ class Chart extends Component {
     this.state = {
       iexResultsLabels: [],
       iexResults: [],
-      stockList: this.props.tickers
+      stockList: props.tickers
     }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ stockList: nextProps.tickers });
-    this.getStockDataMap();
+    this.getStockDataMap(nextProps.tickers);
+    console.log('nextProps: ', nextProps.tickers, 'state: ', this.state.stockList );
   }
 
-  componentDidMount() {
+  componentWillMount() {
      this.getStockDataMap();
   }
 
-  async getStockDataMap() {
-    const stocks = this.props.tickers;
+  async getStockDataMap(tickers) {
+    const stocks = tickers || this.state.stockList;
 
     let iexStockDataResults = await Promise.all(stocks.map(async (ticker) => {
 
@@ -60,7 +61,7 @@ class Chart extends Component {
     
   }
   
-  // Reusable function to get a stock's data OK
+  // Reusable function to get a stock's data
   getIEXData(ticker) {
     return axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {

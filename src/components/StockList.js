@@ -36,19 +36,20 @@ class StockList extends Component {
     if (data.error) {
       return 'error';
     }
-    return data.stocks.map((stock, index) => {
+    let tickerListResults = data.stocks.map((stock, index) => {
       return stock.ticker;
     })
+    return (<Chart tickers={ tickerListResults } />)
   }
 
   render() {
 
-    let tickerListResults = this.tickerList();
-
     return (
       <div>
+        <div>
+          { this.tickerList() }
+        </div>
         <ul>
-          { tickerListResults !== 'loading' ? <Chart tickers={ tickerListResults } /> : null }
           { this.displayStocks() }
           <li key="add"><AddStock /></li>
         </ul>
