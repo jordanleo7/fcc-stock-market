@@ -31,7 +31,8 @@
     "eject": "react-scripts eject",
     "start-server": "nodemon server/server.js",
     "start-client": "react-scripts start",
-    "start-dev": "npm-run-all -p start-server start-client"
+    "start-dev": "npm-run-all -p start-server start-client",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "devDependencies": {
     "nodemon": "^1.17.2",
