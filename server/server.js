@@ -25,8 +25,8 @@ app.use('/graphql', graphqlHTTP({
 }));
 
 // Priority serve any static files.
-//app.use(express.static("build"));
-app.use(express.static(path.resolve(__dirname, '../build')));
+app.use(express.static("../build"));
+//app.use(express.static(path.resolve(__dirname, '../build')));
 
 // All remaining requests return the React app, so it can handle routing
 app.route('*', function(request, response) {
