@@ -22,7 +22,7 @@ class AddStock extends Component {
     event.preventDefault();
     this.props.addStockMutation({
       variables: {
-        ticker: this.state.ticker
+        ticker: this.state.ticker.toUpperCase()
       },
       refetchQueries: [{ query: getStocksQuery }]
     })

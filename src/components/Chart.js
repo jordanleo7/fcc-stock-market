@@ -19,7 +19,7 @@ class Chart extends Component {
     console.log('nextProps: ', nextProps.tickers, 'state: ', this.state.stockList );
   }
 
-  componentWillMount() {
+  componentDidMount() {
      this.getStockDataMap();
   }
 

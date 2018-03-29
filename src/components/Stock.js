@@ -12,7 +12,7 @@ class Stock extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     axios.get(`https://api.iextrading.com/1.0/stock/${this.props.stock.ticker}/quote`)
     .then((response) => {
       this.setState({ iexdata: response });
