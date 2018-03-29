@@ -11,9 +11,15 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
 
 // web socket.io
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+// const http = require('http').Server(app);
+const socket = require('socket.io-client')(process.env.WEBSITE);
+socket.on('connect', function(){
+  console.log('a client has connected to the websocket')
+});
+socket.on('event', function(data){});
+socket.on('disconnect', function(){});
 
+/*
 io.on('connection', (client) => {
   console.log('A user connected to websocket');
   client.on('subscribeToTimer', (interval) => {
@@ -23,8 +29,8 @@ io.on('connection', (client) => {
     }, interval);
   });
 });
-
-io.listen(process.env.WEBSOCKET);
+*/
+// io.listen(process.env.WEBSOCKET);
 
 app.use(cors());
 app.options('*', cors());
