@@ -24,8 +24,7 @@
     "react-apollo": "^2.1.1",
     "react-chartjs-2": "^2.7.0",
     "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-router-dom": "^4.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,9 +34,13 @@
     "start-server": "nodemon server/server.js",
     "start-client": "react-scripts start",
     "start-dev": "npm-run-all -p start-server start-client",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
+  "cacheDirectories": [
+    "node_modules"
+  ],
   "devDependencies": {
+    "react-scripts": "1.1.1",
     "nodemon": "^1.17.2",
     "npm-run-all": "^4.1.2"
   },
