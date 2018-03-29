@@ -9,6 +9,7 @@ import Home from './components/Home';
 import AddStock from './components/AddStock';
 import logo from './logo.svg';
 import './App.css';
+import { subscribeToTimer } from './api';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: process.env.HTTPLINK }),
@@ -16,12 +17,23 @@ const client = new ApolloClient({
 });
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      timestamp: 'no timestamp yet'
+    };
+    subscribeToTimer((err, timestamp) => this.setState({ 
+      timestamp
+    }));
+  }
+
   render() {
     return (
       <ApolloProvider client={client}>
         <Router>
           <div>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Home} timestamp={this.state.timestamp} />
             <Switch>
               <Route exact path='/addstock/' component={AddStock} />
             </Switch>

@@ -10,6 +10,22 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 const app = express();
 
+// web socket.io
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+io.on('connection', (client) => {
+  console.log('A user connected to websocket');
+  client.on('subscribeToTimer', (interval) => {
+    console.log('client is subscribed to timer with interval ', interval);
+    setInterval(() => {
+      client.emit('timer', new Date());
+    }, interval);
+  });
+});
+
+io.listen(process.env.WEBSOCKET);
+
 app.use(cors());
 app.options('*', cors());
 app.use(bodyParser.json());
@@ -24,14 +40,6 @@ app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true
 }));
-
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-io.on('connection', function(client) {
-  client.on('event', function(data){});
-  client.on('disconnect', function(){});
-});
-//server.listen(process.env.IO_PORT || 5000);
 
 // Priority serve any static files.
 app.use(express.static("build"));

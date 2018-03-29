@@ -2,12 +2,21 @@ import React, { Component } from 'react';
 import StockList from './StockList';
 
 class Home extends Component {
+
+  constructor(props) {
+    super(props);
+      this.state = {
+        timestamp: props.timestamp
+    }
+  }
+
   render() {
     return (
       <div>
         <StockList />
         <footer>
           <div>
+            {this.state.timestamp}
             <p>
               Data provided for free by <a href="https://iextrading.com/developer">IEX</a>.
             </p>
