@@ -16,7 +16,6 @@ class Home extends Component {
         <StockList />
         <footer>
           <div>
-            {this.state.timestamp}
             <p>
               Data provided for free by <a href="https://iextrading.com/developer">IEX</a>.
             </p>
