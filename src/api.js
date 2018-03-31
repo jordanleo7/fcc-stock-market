@@ -1,6 +1,6 @@
-import ioclient from 'socket.io-client';
+import io from 'socket.io-client';
 
-const socket = ioclient('http://localhost:4000');
+const socket = io('http://localhost');
 
 function testing() {
   socket.on('connect', 'hello there');

@@ -8,7 +8,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
-const app = express();
+const app = require('express')();
 
 app.use(cors());
 app.options('*', cors());
@@ -16,9 +16,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 // socket.io
-const io = require('socket.io')(app);
-io.on('connect', (socket) => {
+const server = require('http').Server(app)
+const io = require('socket.io')(server);
+io.on('connection', (socket) => {
   console.log('a user connected');
+  socket.on('error', (error) => {
+
+  });
+  socket.on('disconnecting', (reason) => {
+
+  });
 });
 
 // mongoose
