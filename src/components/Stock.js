@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import AddStock from './AddStock';
 import DeleteStock from './DeleteStock';
 
 class Stock extends Component {

@@ -17,17 +17,14 @@ const client = new ApolloClient({
 });
 
 class App extends Component {
-/*
+
   constructor(props) {
     super(props);
     this.state = {
-      timestamp: 'no timestamp yet'
+
     };
-    subscribeToTimer((err, timestamp) => this.setState({ 
-      timestamp
-    }));
-  }timestamp={this.state.timestamp}
-*/
+  }
+
   render() {
     return (
       <ApolloProvider client={client}>

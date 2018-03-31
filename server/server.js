@@ -10,38 +10,24 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 const app = express();
 
-// web socket.io
-// const http = require('http').Server(app);
-const socket = require('socket.io-client')(process.env.WEBSITE);
-socket.on('connect', function(){
-  console.log('a client has connected to the websocket')
-});
-socket.on('event', function(data){});
-socket.on('disconnect', function(){});
-
-/*
-io.on('connection', (client) => {
-  console.log('A user connected to websocket');
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribed to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  });
-});
-*/
-// io.listen(process.env.WEBSOCKET);
-
 app.use(cors());
 app.options('*', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
+// socket.io
+const io = require('socket.io')(app);
+io.on('connect', (socket) => {
+  console.log('a user connected');
+});
+
+// mongoose
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+// graphql
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   graphiql: true

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 import { addStockMutation, getStocksQuery } from '../queries/queries';
 
 class AddStock extends Component {
