@@ -13,7 +13,7 @@ class StockList extends Component {
     }
   }
 
-  displayStocks() {
+  stockList() {
     let data = this.props.data;
     if (data.loading) {
       return ( <div>Loading stocks</div> );
@@ -28,7 +28,7 @@ class StockList extends Component {
     })
   }
 
-  tickerList() {
+  tickerChart() {
     let data = this.props.data;
     if (data.loading) {
       return 'loading';
@@ -47,10 +47,10 @@ class StockList extends Component {
     return (
       <div>
         <div>
-          { this.tickerList() }
+          { this.tickerChart() }
         </div>
-        <ul>
-          { this.displayStocks() }
+        <ul className="stocklist">
+          { this.stockList() }
           <li key="add"><AddStock /></li>
         </ul>
       </div>

@@ -1,28 +1,26 @@
-.App {
-  text-align: center;
+.stocklist {
+  width: 100%
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.stocklist li {
+  list-style: none;
+  display: inline-block;
+  width: 33%;
+  background-color: white;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.button--delete-stock {
+  background: red;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.button--add-stock {
+  background: green;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
 }

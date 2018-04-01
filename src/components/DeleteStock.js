@@ -26,7 +26,7 @@ class DeleteStock extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <button type="submit">Delete</button>
+          <button type="submit" className="button--delete-stock">X</button>
         </form>
       </div>
     )

@@ -32,7 +32,7 @@ class AddStock extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="ticker" value={this.state.ticker} onChange={this.handleTickerChange} placeholder="ticker" required />
-          <button type="submit">Add</button>
+          <button type="submit" className="button--add-stock">Add</button>
         </form>
       </div>
     )
