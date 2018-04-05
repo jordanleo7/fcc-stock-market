@@ -16,17 +16,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
 // socket.io
-const server = require('http').Server(app)
-const io = require('socket.io')(server);
-io.on('connection', (socket) => {
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const socket = require('socket.io-client')(process.env.DOMAINNAME);
+socket.on('connect', function(){console.log('hello world')});
+socket.on('event', function(data){});
+socket.on('disconnect', function(){});
+/*
+io.on('connection', function(socket){
   console.log('a user connected');
-  socket.on('error', (error) => {
-
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
   });
-  socket.on('disconnecting', (reason) => {
+});*/
 
-  });
-});
+
 
 // mongoose
 mongoose.connect(process.env.MONGO_URI);
@@ -50,4 +54,5 @@ app.route('*', function(request, response) {
 
 // Server listen
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Express is listening on port ${PORT}`))
+const server = app.listen(PORT, () => console.log(`Express is listening on port ${PORT}`))
+
