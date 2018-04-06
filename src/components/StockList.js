@@ -4,6 +4,7 @@ import { getStocksQuery } from '../queries/queries';
 import Stock from './Stock';
 import AddStock from './AddStock';
 import Chart from './Chart';
+import io from "socket.io-client";
 
 class StockList extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class StockList extends Component {
     this.state = {
 
     }
+    this.socket = io(process.env.DOMAIN_NAME)
+    this.socket.on('receive_stock', data => {
+      this.props.data.refetch()
+    })
   }
 
   stockList() {
@@ -43,7 +48,6 @@ class StockList extends Component {
   }
 
   render() {
-
     return (
       <div>
         <div>

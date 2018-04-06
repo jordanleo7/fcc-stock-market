@@ -10,6 +10,7 @@ class AddStock extends Component {
     this.state = {
       ticker: ''
     };
+    this.socket = io(process.env.DOMAIN_NAME)
     this.handleTickerChange = this.handleTickerChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -23,8 +24,11 @@ class AddStock extends Component {
     this.props.addStockMutation({
       variables: {
         ticker: this.state.ticker.toUpperCase()
-      },
-      refetchQueries: [{ query: getStocksQuery }]
+      }//,
+      //refetchQueries: [{ query: getStocksQuery }]
+    })
+    this.socket.emit('add_stock', {
+      ticker: this.state.ticker.toUpperCase()
     })
   }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+//import io from "socket.io-client";
 
 class Chart extends Component {
 
@@ -11,6 +12,12 @@ class Chart extends Component {
       iexResults: [],
       stockList: props.tickers
     }
+    /*this.socket = io(process.env.DOMAIN_NAME)
+    this.socket.on('receive_stock', data => {
+      this.setState({
+        stockList: [...this.state.stockList, data.ticker]
+      })
+    })*/
   }
 
   componentWillReceiveProps(nextProps) {

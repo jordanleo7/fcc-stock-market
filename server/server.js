@@ -45,8 +45,8 @@ io.on('connection', (socket) => {
 
   console.log('Socket.io connected');
 
-  socket.on('subscribeToStockQuery', () => {
-    console.log('user is subscribed to stock query');
+  socket.on('add_stock', (data) => {
+    io.emit('receive_stock', data);
   });
 
   socket.on('send_message', function(data){
