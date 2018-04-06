@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { addStockMutation, getStocksQuery } from '../queries/queries';
+import io from "socket.io-client";
 
 class AddStock extends Component {
 

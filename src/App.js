@@ -9,7 +9,7 @@ import Home from './components/Home';
 import AddStock from './components/AddStock';
 import logo from './logo.svg';
 import './App.css';
-//import { subscribeToTimer } from './api';
+//import { subscribeToStockQuery } from './api';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: process.env.HTTPLINK }),
@@ -21,11 +21,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      stockList: null
     };
+    //subscribeToStockQuery((err, newStockList) => this.setState({stockList: newStockList}));
   }
 
   render() {
+    console.log('App.js stockList: ', this.state.stockList);
     return (
       <ApolloProvider client={client}>
         <Router>

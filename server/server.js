@@ -15,23 +15,6 @@ app.options('*', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
 
-// socket.io
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const socket = require('socket.io-client')(process.env.DOMAINNAME);
-socket.on('connect', function(){console.log('hello world')});
-socket.on('event', function(data){});
-socket.on('disconnect', function(){});
-/*
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});*/
-
-
-
 // mongoose
 mongoose.connect(process.env.MONGO_URI);
 mongoose.connection.once('open', () => {
@@ -56,3 +39,18 @@ app.route('*', function(request, response) {
 const PORT = process.env.PORT || 4000;
 const server = app.listen(PORT, () => console.log(`Express is listening on port ${PORT}`))
 
+const io = require('socket.io').listen(server);
+
+io.on('connection', (socket) => {
+
+  console.log('Socket.io connected');
+
+  socket.on('subscribeToStockQuery', () => {
+    console.log('user is subscribed to stock query');
+  });
+
+  socket.on('send_message', function(data){
+    io.emit('receive_message', data);
+  });
+
+});
