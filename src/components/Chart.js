@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
-//import io from "socket.io-client";
 
 class Chart extends Component {
 
@@ -10,28 +9,22 @@ class Chart extends Component {
     this.state = {
       iexResultsLabels: [],
       iexResults: [],
-      stockList: props.tickers
+      stockList: this.props.tickers
     }
-    /*this.socket = io(process.env.DOMAIN_NAME)
-    this.socket.on('receive_stock', data => {
-      this.setState({
-        stockList: [...this.state.stockList, data.ticker]
-      })
-    })*/
   }
-/*
+
   componentWillReceiveProps(nextProps) {
     this.setState({ stockList: nextProps.tickers });
-    this.getStockDataMap(nextProps.tickers);
-    console.log('nextProps: ', nextProps.tickers, 'state: ', this.state.stockList );
-  }*/
-
-  componentDidMount() {
-     this.getStockDataMap();
+    //this.getStockDataMap(nextProps.tickers);
   }
 
-  async getStockDataMap(tickers) {
-    const stocks = tickers || this.state.stockList;
+  componentDidMount() {
+    this.getStockDataMap()
+  }
+
+  async getStockDataMap() {
+    const stocks = this.state.stockList;
+    //const stocks = this.props.tickers;
 
     let iexStockDataResults = await Promise.all(stocks.map(async (ticker) => {
 
@@ -53,10 +46,12 @@ class Chart extends Component {
     })
 
     let finalResult = iexStockDataResults.map((result, index) => {
+      let tempColor = Math.floor(Math.random()*16777215).toString(16);
       let obj = {
         label: stocks[index],
         data: result,
-        borderColor: `#${Math.floor(Math.random()*16777215).toString(16)}`,
+        backgroundColor: tempColor,
+        borderColor: tempColor,
         borderWidth: 2,
         pointRadius: 0,
         fill: false
@@ -84,7 +79,7 @@ class Chart extends Component {
 
   render() {
 
-    const chartData = {
+    let chartData = {
       labels: this.state.iexResultsLabels,
       datasets: this.state.iexResults
     };
@@ -119,7 +114,6 @@ class Chart extends Component {
             }
           }}
         />
-
       </div>
     )
   }

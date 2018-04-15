@@ -10,7 +10,9 @@ import io from "socket.io-client";
 class StockList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      tickers: null
+    };
     this.socket = io(process.env.DOMAIN_NAME);
     this.socket.on('receive_stock', data => {
       this.props.data.fetchMore({
