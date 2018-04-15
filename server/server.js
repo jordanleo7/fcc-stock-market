@@ -49,6 +49,10 @@ io.on('connection', (socket) => {
     io.emit('receive_stock', data);
   });
 
+  socket.on('delete_stock', (data) => {
+    io.emit('receive_stock', data);
+  });
+
   socket.on('send_message', function(data){
     io.emit('receive_message', data);
   });

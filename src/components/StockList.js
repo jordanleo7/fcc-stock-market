@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+import { Query } from "react-apollo";
 import { getStocksQuery } from '../queries/queries';
 import Stock from './Stock';
 import AddStock from './AddStock';
@@ -9,12 +10,27 @@ import io from "socket.io-client";
 class StockList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    }
-    this.socket = io(process.env.DOMAIN_NAME)
+    this.state = {};
+    this.socket = io(process.env.DOMAIN_NAME);
     this.socket.on('receive_stock', data => {
-      this.props.data.refetch()
+      this.props.data.fetchMore({
+        updateQuery: (previousResult, { fetchMoreResult, queryVariables }) => {
+          return {
+            ...previousResult,
+            // Add the new data to the end of the old data.
+            stocks: [/*...previousResult.stocks,*/ ...fetchMoreResult.stocks],
+          };
+        },
+      });
+      //<Query query={getStocksQuery}>
+      //{() => refetch()}
+      //</Query>
+      //mutate({
+        //... insert comment mutation
+        // <Query query={getStocksQuery}>{() => refetch()}</Query>
+      // this.props.data.refetch() 
+    //})
+      //apolloclient.queryManager.refetchQueryByName(getStocksQuery); // refetchQueries: [{ query: getStocksQuery }]
     })
   }
 
@@ -48,6 +64,8 @@ class StockList extends Component {
   }
 
   render() {
+
+    console.log('getStocksQuery:',this.props.data)
     return (
       <div>
         <div>

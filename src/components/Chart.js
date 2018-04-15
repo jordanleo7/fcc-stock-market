@@ -19,12 +19,12 @@ class Chart extends Component {
       })
     })*/
   }
-
+/*
   componentWillReceiveProps(nextProps) {
     this.setState({ stockList: nextProps.tickers });
     this.getStockDataMap(nextProps.tickers);
     console.log('nextProps: ', nextProps.tickers, 'state: ', this.state.stockList );
-  }
+  }*/
 
   componentDidMount() {
      this.getStockDataMap();

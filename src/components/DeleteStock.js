@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { deleteStockMutation, getStocksQuery } from '../queries/queries';
+import io from "socket.io-client";
 
 class DeleteStock extends Component {
 
@@ -10,6 +11,7 @@ class DeleteStock extends Component {
       
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.socket = io(process.env.DOMAIN_NAME)
   }
 
   handleSubmit(event) {
@@ -18,7 +20,10 @@ class DeleteStock extends Component {
       variables: {
         ticker: this.props.stockTicker
       },
-      refetchQueries: [{ query: getStocksQuery }]
+      //refetchQueries: [{ query: getStocksQuery }]
+    })
+    this.socket.emit('delete_stock', {
+      ticker: 'stock deleted'
     })
   }
 

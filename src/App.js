@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -27,14 +27,13 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <Router>
+        <BrowserRouter>
           <div>
-            <Route exact path='/' component={Home}  />
             <Switch>
-              <Route exact path='/addstock/' component={AddStock} />
+              <Route exact path='/' component={Home}  />
             </Switch>
           </div>
-        </Router>
+        </BrowserRouter>
       </ApolloProvider>
     );
   }
