@@ -19,8 +19,7 @@ class DeleteStock extends Component {
     this.props.deleteStockMutation({
       variables: {
         ticker: this.props.stockTicker
-      },
-      //refetchQueries: [{ query: getStocksQuery }]
+      }//, refetchQueries: [{ query: getStocksQuery }]
     })
     this.socket.emit('delete_stock', {
       ticker: 'stock deleted'

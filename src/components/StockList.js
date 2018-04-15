@@ -37,7 +37,7 @@ class StockList extends Component {
   }
 
   stockList() {
-    let data = this.props.data;
+    const data = this.props.data;
     if (data.loading) {
       return ( <div>Loading stocks</div> );
     } 
@@ -52,7 +52,7 @@ class StockList extends Component {
   }
 
   tickerChart() {
-    let data = this.props.data;
+    const data = this.props.data;
     if (data.loading) {
       return 'loading';
     } 
@@ -62,7 +62,7 @@ class StockList extends Component {
     let tickerListResults = data.stocks.map((stock, index) => {
       return stock.ticker;
     })
-    return (<Chart tickers={ tickerListResults } />)
+    return (console.log('tickers:',tickerListResults), <Chart tickers={ tickerListResults } />)
   }
 
   render() {

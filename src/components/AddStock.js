@@ -24,8 +24,7 @@ class AddStock extends Component {
     this.props.addStockMutation({
       variables: {
         ticker: this.state.ticker.toUpperCase()
-      }//,
-      //refetchQueries: [{ query: getStocksQuery }]
+      }//, refetchQueries: [{ query: getStocksQuery }]
     })
     this.socket.emit('add_stock', {
       ticker: this.state.ticker.toUpperCase()
