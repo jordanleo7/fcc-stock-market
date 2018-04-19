@@ -1,26 +1,166 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 
+  End of css reset
+*/
+
+body {
+  font-family: Arial, "Sans-serif";
+}
+
+.stock--data-container {
+  clear: both;
+}
+
+.stock--data-container p:first-child {
+  border-bottom: 1px solid gray;
+  text-align: center;
+}
+
+.stock--data-container p {
+  line-height: 120%;
+}
+
 .stocklist {
-  width: 100%
+  width: 96%;
+  margin: 20px 2%;
+  padding: 0;
+  list-style: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .stocklist li {
-  list-style: none;
   display: inline-block;
-  width: 33%;
-  background-color: white;
+  width: 31.33%;
+  margin: 1%;
+}
+
+.stock--ticker {
+  float: left;
+  font-weight: bold;
 }
 
 .button--delete-stock {
-  background: red;
-  color: black;
-  border: 1px solid black;
-  border-radius: 5px;
+  background: none;
+  color: red;
+  border: none;
+  font-weight: bold;
   cursor: pointer;
+  float: right;
+}
+
+.addstock--input {
+  border: none;
+  border-bottom: 2px solid green;
+  width: 80%;
+  font-size: 100%;
 }
 
 .button--add-stock {
-  background: green;
-  color: black;
-  border: 1px solid black;
-  border-radius: 5px;
+  background: none;
+  border: none;
+  color: green;
+  font-weight: bold;
+  cursor: pointer;
+  float: right;
+  font-size: 100%;
+  width: 15%;
+}
+
+.chat {
+  width: 94%;
+  margin: 20px 2%;
+  padding: 1%;
+  list-style: none;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.chat--input {
+  border: none;
+  border-bottom: 2px solid black;
+  margin-right: 16px;
+  font-size: 100%;
+}
+
+.chat--messages {
+  padding: 0;
+  height: 100px;
+  overflow: auto;
+  border: 1px solid lightgray;
+  margin: 10px 0;
+}
+
+.chat--username {
+  font-weight: bold;
+}
+
+footer {
+  width: 94%;
+  margin: 20px 2%;
+  padding: 1%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  text-align: center;
+  line-height: 120%;
+}
+
+footer a {
+  text-decoration: none;
+  color: blue;
+  font-weight: bold;
+}
+
+.chat--submit {
+  background: none;
+  border: none;
+  color: green;
+  font-weight: bold;
+  font-size: 100%;
   cursor: pointer;
 }

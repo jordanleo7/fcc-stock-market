@@ -45,15 +45,16 @@ class Chat extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          {this.state.messages.map((message, index) => {return (<div key={index}>{message.username}: {message.message}</div>)})}
+      <div className="chat">
+        <p>Chat with other users on the site!</p>
+        <div className="chat--messages">
+          {this.state.messages.map((message, index) => {return (<div key={index}><span className="chat--username">{message.username}:</span> {message.message}</div>)})}
         </div>
         <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleInputChange} />
-            <input type="text" placeholder="Message" name="message" value={this.state.message} onChange={this.handleInputChange} />
-            <input type="submit" value="Send" />
+          <form className="chat--form" onSubmit={this.handleSubmit}>
+            <input className="chat--input" type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleInputChange} />
+            <input className="chat--input" type="text" placeholder="Message" name="message" value={this.state.message} onChange={this.handleInputChange} />
+            <input className="chat--submit" type="submit" value="Send" />
           </form>
         </div>
       </div>

@@ -24,10 +24,19 @@ class Stock extends Component {
 
   render() {
     return (
-      <li> 
-        {this.props.stock.ticker} latest price:
-        {this.state.iexdata.latestPrice}
-        <DeleteStock stockTicker={this.props.stock.ticker} />
+      <li>
+        <div>
+          <span className="stock--ticker">{this.props.stock.ticker}</span>
+          <DeleteStock stockTicker={this.props.stock.ticker} />
+        </div>
+        <div className="stock--data-container">
+          <p>{this.state.iexdata.companyName}</p>
+          <p>Latest price: {this.state.iexdata.latestPrice}</p>
+          <p>Change: {this.state.iexdata.change}%</p>
+          <p>52 Week High: {this.state.iexdata.week52High}</p>
+          <p>52 Week Low: {this.state.iexdata.week52Low}</p>
+          <p>Average Volume: {this.state.iexdata.avgTotalVolume}</p>
+        </div>
       </li>
     )
   }

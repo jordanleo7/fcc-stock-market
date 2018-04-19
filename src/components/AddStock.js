@@ -37,16 +37,11 @@ class AddStock extends Component {
         this.socket.emit('add_stock', {
           ticker: this.state.ticker.toUpperCase()
         })
-      } else {
-
       }
-
-
-      //this.setState({ iexdata: response.data });
-      //console.log('Stock.js stock data:',this.state.iexdata);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); 
+      alert(this.state.ticker + ' is not a valid stock ticker.')
     })
 
 
@@ -58,7 +53,7 @@ class AddStock extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="ticker" value={this.state.ticker} onChange={this.handleTickerChange} placeholder="Stock ticker" required />
+          <input type="text" className="addstock--input" name="ticker" value={this.state.ticker} onChange={this.handleTickerChange} placeholder="Stock ticker" required />
           <button type="submit" className="button--add-stock">Add</button>
         </form>
       </div>

@@ -39,7 +39,7 @@ class Chart extends Component {
 
     }))
 
-    if (this.state.stockList.length < 0) {
+    if (this.state.stockList.length > 0) {
 
       let finalLabels = iexStockDataResults[0].map((day, index) => {
         return day.label
