@@ -39,28 +39,30 @@ class Chart extends Component {
 
     }))
 
-    let finalLabels = iexStockDataResults[0].map((day, index) => {
-      return day.label
-    })
+    if (this.state.stockList.length < 0) {
 
-    let finalResult = iexStockDataResults.map((result, index) => {
-      let tempColor = Math.floor(Math.random()*16777215).toString(16);
-      let obj = {
-        label: tickers[index],
-        data: result,
-        backgroundColor: tempColor,
-        borderColor: tempColor,
-        borderWidth: 2,
-        pointRadius: 0,
-        fill: false
-      };
-      return obj;
-    })
+      let finalLabels = iexStockDataResults[0].map((day, index) => {
+        return day.label
+      })
+  
+      let finalResult = iexStockDataResults.map((result, index) => {
+        let tempColor = Math.floor(Math.random()*16777215).toString(16);
+        let obj = {
+          label: tickers[index],
+          data: result,
+          backgroundColor: tempColor,
+          borderColor: tempColor,
+          borderWidth: 2,
+          pointRadius: 0,
+          fill: false
+        };
+        return obj;
+      })
+  
+      this.setState({ iexResults: finalResult, iexResultsLabels: finalLabels });
+  
+    }
 
-    this.setState({ iexResults: finalResult, iexResultsLabels: finalLabels });
-
-
-    
   }
   
   // Reusable function to get a stock's data
