@@ -14,12 +14,17 @@ class Chart extends Component {
   }
 
   componentDidMount() {
-    this.getStockDataMap()
+    this.getStockDataMap(this.props.tickers)
   }
 
-  async getStockDataMap() {
+  componentWillReceiveProps(nextProps) {
+    this.setState({ stockList: nextProps.tickers });
+    this.getStockDataMap(nextProps.tickers);
+  }
 
-    let iexStockDataResults = await Promise.all(this.state.stockList.map(async (ticker) => {
+  async getStockDataMap(tickers) {
+
+    let iexStockDataResults = await Promise.all(tickers.map(async (ticker) => {
 
       let iexStockData;
       try {
@@ -41,7 +46,7 @@ class Chart extends Component {
     let finalResult = iexStockDataResults.map((result, index) => {
       let tempColor = Math.floor(Math.random()*16777215).toString(16);
       let obj = {
-        label: this.state.stockList[index],
+        label: tickers[index],
         data: result,
         backgroundColor: tempColor,
         borderColor: tempColor,
@@ -53,6 +58,8 @@ class Chart extends Component {
     })
 
     this.setState({ iexResults: finalResult, iexResultsLabels: finalLabels });
+
+
     
   }
   
@@ -72,15 +79,15 @@ class Chart extends Component {
 
   render() {
 
-    let chartData = {
+    const chartData = () => ({
       labels: this.state.iexResultsLabels,
       datasets: this.state.iexResults
-    };
+    });
 
     return (
       <div className="chart">
         <Line
-          data={chartData}
+          data={{labels: this.state.iexResultsLabels, datasets: this.state.iexResults}}
           width={320}
           height={320}
           options={{
