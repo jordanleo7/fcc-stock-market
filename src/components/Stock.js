@@ -14,8 +14,8 @@ class Stock extends Component {
   componentDidMount() {
     axios.get(`https://api.iextrading.com/1.0/stock/${this.props.stock.ticker}/quote`)
     .then((response) => {
-      this.setState({ iexdata: response });
-      console.log(this.state.iexdata);
+      this.setState({ iexdata: response.data });
+      console.log('Stock.js stock data:',this.state.iexdata);
     })
     .catch((error) => {
       console.log(error);
@@ -25,7 +25,7 @@ class Stock extends Component {
   render() {
     return (
       <li> 
-        {this.props.stock.ticker}
+        {this.props.stock.ticker} latest price:
         {this.state.iexdata.latestPrice}
         <DeleteStock stockTicker={this.props.stock.ticker} />
       </li>

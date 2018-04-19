@@ -62,7 +62,7 @@ class StockList extends Component {
     let tickerListResults = data.stocks.map((stock, index) => {
       return stock.ticker;
     })
-    return (console.log('tickers:',tickerListResults), <Chart tickers={ tickerListResults } />)
+    return <Chart tickers={ tickerListResults } />
   }
 
   render() {
