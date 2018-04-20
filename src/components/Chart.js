@@ -42,9 +42,8 @@ class Chart extends Component {
     if (this.state.stockList.length > 0) {
 
       let finalLabels = iexStockDataResults[0].map((day, index) => {
-        return day.label
+        return day.x
       })
-
       let browserColorFix = ['red', 'blue', 'orange', 'green', 'purple', 'brown', 'black', 'gray']
   
       let finalResult = iexStockDataResults.map((result, index) => {
@@ -114,7 +113,7 @@ class Chart extends Component {
             },
             scales: {
               xAxes: [{
-                display: false
+                display: true
               }]
             }
           }}
