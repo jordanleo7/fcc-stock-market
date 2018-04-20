@@ -71,7 +71,6 @@ class Chart extends Component {
   getIEXData(ticker) {
     return axios.get(`https://api.iextrading.com/1.0/stock/${ticker}/chart/1y`)
     .then((response) => {
-      console.log(response);
       return response.data.map((day, index) => {
         return ({x: day.label, y: day.close});
       })
@@ -83,10 +82,10 @@ class Chart extends Component {
 
   render() {
 
-    const chartData = () => ({
-      labels: this.state.iexResultsLabels,
-      datasets: this.state.iexResults
-    });
+    //const chartData = () => ({
+    //  labels: this.state.iexResultsLabels,
+    //  datasets: this.state.iexResults
+    //});
 
     return (
       <div className="chart">

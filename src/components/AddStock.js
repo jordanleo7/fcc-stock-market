@@ -23,7 +23,6 @@ class AddStock extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('event:',this.props.tickers)
     // Check number of stocks on page
     if (this.props.tickers.length > 7) {
       alert('List limit is 8. Please remove a stock.')
@@ -31,7 +30,7 @@ class AddStock extends Component {
     } else {
     // Check if stock already exists
       let findStock = this.props.tickers.find((e)=>{
-        return e.ticker == this.state.ticker.toUpperCase();
+        return e.ticker === this.state.ticker.toUpperCase();
       })
       if (!findStock) {
         // Check if stock input is valid

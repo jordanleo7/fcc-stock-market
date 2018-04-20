@@ -15,7 +15,6 @@ class Stock extends Component {
     axios.get(`https://api.iextrading.com/1.0/stock/${this.props.stock.ticker}/quote`)
     .then((response) => {
       this.setState({ iexdata: response.data });
-      console.log('Stock.js stock data:',this.state.iexdata);
     })
     .catch((error) => {
       console.log(error);

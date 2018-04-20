@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { Query } from "react-apollo";
 import { getStocksQuery } from '../queries/queries';
 import Stock from './Stock';
 import AddStock from './AddStock';
@@ -66,8 +65,6 @@ class StockList extends Component {
   }
 
   render() {
-
-    console.log('getStocksQuery:',this.props.data)
     return (
       <div>
         <div className="chart--container">
