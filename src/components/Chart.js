@@ -44,14 +44,17 @@ class Chart extends Component {
       let finalLabels = iexStockDataResults[0].map((day, index) => {
         return day.label
       })
+
+      let browserColorFix = ['red', 'blue', 'orange', 'green', 'purple', 'brown', 'black', 'gray']
   
       let finalResult = iexStockDataResults.map((result, index) => {
-        let tempColor = Math.floor(Math.random()*16777215).toString(16);
+        //Random colors only worked in Safari, not Chrome nor Firefox(?) Tried adding #
+        //let tempColor = Math.floor(Math.random()*16777215).toString(16);
         let obj = {
           label: tickers[index],
           data: result,
-          backgroundColor: tempColor,
-          borderColor: tempColor,
+          backgroundColor: browserColorFix[index], //tempColor,
+          borderColor: browserColorFix[index], //tempColor,
           borderWidth: 2,
           pointRadius: 0,
           fill: false
