@@ -68,6 +68,12 @@ body {
   line-height: 120%;
 }
 
+.chart--container {
+  margin: 0 auto;
+  width: 96%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
 .stocklist {
   width: 96%;
   margin: 20px 2%;
@@ -96,11 +102,18 @@ body {
   float: right;
 }
 
+.addstock--container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
 .addstock--input {
   border: none;
   border-bottom: 2px solid green;
-  width: 80%;
+  width: 60%;
   font-size: 100%;
+  display: inline-block;
 }
 
 .button--add-stock {
@@ -109,9 +122,8 @@ body {
   color: green;
   font-weight: bold;
   cursor: pointer;
-  float: right;
   font-size: 100%;
-  width: 15%;
+  float: right;
 }
 
 .chat {
@@ -122,11 +134,20 @@ body {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.chat--input {
+.chat--input-username {
   border: none;
   border-bottom: 2px solid black;
   margin-right: 16px;
   font-size: 100%;
+  width: 25%;
+}
+
+.chat--input-message {
+  border: none;
+  border-bottom: 2px solid black;
+  margin-right: 16px;
+  font-size: 100%;
+  width: 50%;
 }
 
 .chat--messages {
@@ -163,4 +184,11 @@ footer a {
   font-weight: bold;
   font-size: 100%;
   cursor: pointer;
+  float: right;
+}
+
+.notice {
+  margin: 20px 2% 0% 2%;
+  padding: 0;
+  color: gray;
 }

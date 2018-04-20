@@ -23,35 +23,47 @@ class AddStock extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log('event:',this.props.tickers)
+    // Check number of stocks on page
+    if (this.props.tickers.length > 7) {
+      alert('List limit is 8. Please remove a stock.')
+      return;
+    } else {
+    // Check if stock already exists
+      let findStock = this.props.tickers.find((e)=>{
+        return e.ticker == this.state.ticker.toUpperCase();
+      })
+      if (!findStock) {
+        // Check if stock input is valid
+        axios.get(`https://api.iextrading.com/1.0/stock/${this.state.ticker}/quote`)
+        .then((response) => {
 
-    // Check if stock input is valid
-    axios.get(`https://api.iextrading.com/1.0/stock/${this.state.ticker}/quote`)
-    .then((response) => {
-      // If stock is valid, add it to database:
-      if (response.data) {
-        this.props.addStockMutation({
-          variables: {
-            ticker: this.state.ticker.toUpperCase()
-          }//, refetchQueries: [{ query: getStocksQuery }]
+          // If stock is valid, add it to database:
+          if (response.data) {
+            this.props.addStockMutation({
+              variables: {
+                ticker: this.state.ticker.toUpperCase()
+              }//, refetchQueries: [{ query: getStocksQuery }]
+            })
+            this.socket.emit('add_stock', {
+              ticker: this.state.ticker.toUpperCase()
+            })
+            this.setState({message: ''})
+          }
         })
-        this.socket.emit('add_stock', {
-          ticker: this.state.ticker.toUpperCase()
+        .catch((error) => {
+          console.log(error); 
+          alert(this.state.ticker.toUpperCase() + ' is not a valid stock ticker.')
         })
+      } else if (findStock) {
+        alert(`${this.state.ticker.toUpperCase()} is already in the list.`)
       }
-    })
-    .catch((error) => {
-      console.log(error); 
-      alert(this.state.ticker + ' is not a valid stock ticker.')
-    })
-
-
-
-
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="addstock--container">
         <form onSubmit={this.handleSubmit}>
           <input type="text" className="addstock--input" name="ticker" value={this.state.ticker} onChange={this.handleTickerChange} placeholder="Stock ticker" required />
           <button type="submit" className="button--add-stock">Add</button>

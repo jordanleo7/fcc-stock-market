@@ -70,12 +70,13 @@ class StockList extends Component {
     console.log('getStocksQuery:',this.props.data)
     return (
       <div>
-        <div>
+        <div className="chart--container">
           { this.tickerChart() }
         </div>
+        <p className="notice">This shared list of stocks updates in real time. Anyone viewing this site will see your changes, and you will see theirs! Stock limit: 8</p>
         <ul className="stocklist">
           { this.stockList() }
-          <li key="add"><AddStock /></li>
+          <li key="add"><AddStock tickers={this.props.data.stocks} /></li>
         </ul>
       </div>
     )
